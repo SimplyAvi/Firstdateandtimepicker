@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import DateMomentUtils from '@date-io/moment';
+import {
+  KeyboardDateTimePicker,
+  MuiPickersUtilsProvider,
+} from '@material-ui/pickers';
 
 function App() {
+  const [selectedDate, handleDateChange] = useState(new Date());
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <MuiPickersUtilsProvider utils={DateMomentUtils}>
+      <KeyboardDateTimePicker
+        variant="inline"
+        ampm={false}
+        label="Start Date"
+        value={selectedDate}
+        onChange={handleDateChange}
+        onError={console.log}
+        disablePast
+        format="yyyy/MM/dd HH:mm"
+      />
+ 
+      <KeyboardDateTimePicker
+        variant="inline"
+        ampm={false}
+        label="End Date"
+        value={selectedDate}
+        onChange={handleDateChange}
+        onError={console.log}
+        disablePast
+        format="yyyy/MM/dd HH:mm"
+      />
+    </MuiPickersUtilsProvider>
   );
 }
 
